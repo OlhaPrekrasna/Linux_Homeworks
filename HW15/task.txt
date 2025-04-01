@@ -1,0 +1,41 @@
+#!/bin/bash
+
+
+
+TIME=$(date +"%H:%M:%S")
+
+        for i in {1..10}
+
+        do
+
+          TIME=$(date +"%H:%M:%S")
+
+          PROC_COUNT=$(ps -ef | wc -l)
+
+          echo "$TIME $PROC_COUNT"
+
+          #sleep 5
+
+        done
+
+
+
+cat /proc/cpuinfo > /opt/131224-wdm/olha_prekrasna/proc_info.txt
+
+
+
+cat /etc/os-release | grep ^NAME= | awk -F "\"" '{print $2}' >> /opt/131224-wdm/olha_prekrasna/proc_info.txt
+
+        
+
+       mkdir /opt/131224-wdm/olha_prekrasna/files
+
+        for i in {50..100}
+
+        do
+
+          touch /opt/131224-wdm/olha_prekrasna/files/$i.txt
+
+        done
+
+

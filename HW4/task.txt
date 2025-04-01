@@ -1,0 +1,29 @@
+0 date +%D > newfile.txt
+
+   1 df -h
+
+   2 df -h | grep G
+
+   3 df -h | grep G >> newfile.txt
+
+   4 history
+
+   5 history | tail -3
+
+   6 history | tail -3 >> newfile.txt
+
+   7 grep cron /etc/passwd
+
+   8 grep cron /etc/passwd >> newfile.txt
+
+   9 grep root /etc/group
+
+  10 grep root /etc/group | wc -l
+
+  11 grep root /etc/group | wc -l >> newfile.txt
+
+  12 vi newfile.txt
+
+  13 history > /tmp/history.txt && export_file /tmp/history.txt
+
+

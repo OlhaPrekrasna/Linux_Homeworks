@@ -1,0 +1,36 @@
+#!/bin/bash
+
+read -p "Введите адрес для пинга: " HOST
+
+exit_loop=0
+failed_pings=0
+
+while (( $exit_loop < 1 )); do
+# ping
+ping_out=$(ping -c 1 "${HOST}")
+
+# count failed pings
+exit_code=$?
+echo "Last exit code: ${exit_code}"
+if (( $exit_code > 0 )); then
+failed_pings=$((failed_pings+1))
+else
+failed_pings=0
+fi
+echo "Failed pings: ${failed_pings}"
+# get ping time
+if (( $exit_code < 1 )); then
+ping_time=$(echo "${ping_out}" | grep 'time=' | awk -F'time=' '{print $2}' | awk '{print $1}')
+echo "Ping time: ${ping_time} ms"
+fi
+
+# process exit
+if (( $failed_pings > 2 )); then
+echo "Failed pings threshold reached: ${failed_pings}"
+exit_loop=1
+elif (( $exit_code < 1 )) && (( $(echo "$ping_time > 100" | bc -l) )); then
+echo "Ping time threshold (100ms) reached: ${ping_time}"
+exit_loop=1
+fi
+done
+
